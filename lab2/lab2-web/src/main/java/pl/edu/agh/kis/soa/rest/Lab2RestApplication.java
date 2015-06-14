@@ -33,7 +33,7 @@ public class Lab2RestApplication extends Application {
 	@Override
 	public Set<Object> getSingletons() {
 		Set<Object> singletons = new HashSet<Object>();
-//		singletons.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
+		singletons.add(new org.codehaus.jackson.jaxrs.JacksonJsonProvider());
 		return singletons;
 	}
 }

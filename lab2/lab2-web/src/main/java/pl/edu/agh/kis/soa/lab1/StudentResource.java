@@ -1,5 +1,6 @@
 package pl.edu.agh.kis.soa.lab1;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -31,15 +32,26 @@ public class StudentResource {
 	private static final String LOGIN_KEY = "LOGIN_KEY";
 
 	private static List<Student> studentList;
-
+	
 	@GET
+	@Produces("application/pdf")
+	@Path("/pdf")
+	public Response getPdf(){
+		File file = new File("C:\\Users\\piotr\\Documents\\git\\soa_rest\\lab2\\lab2-web\\vat.pdf");
+		Response.ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+				"attachment; filename=\"vat.pdf\"");
+		return response.build();
+	}
+
+	@GET	
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/students")
 	public Response getStudentList(@Context HttpServletRequest request){
 		HttpSession session = request.getSession();
 		String login = (String) session.getAttribute(LOGIN_KEY);
 		if(login != null){
-			logger.info("returning studentList in number:" + studentList.size());
+			logger.info("returning studentList");
 			return Response.ok(studentList, MediaType.APPLICATION_JSON).build();
 		}
 		else
