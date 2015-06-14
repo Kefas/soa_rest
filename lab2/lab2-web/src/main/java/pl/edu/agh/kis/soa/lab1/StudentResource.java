@@ -30,7 +30,7 @@ public class StudentResource {
 	private static final Logger logger = Logger.getLogger("StudentResource");
 
 	private static final String LOGIN_KEY = "LOGIN_KEY";
-
+	
 	private static List<Student> studentList;
 	
 	@GET
@@ -41,6 +41,17 @@ public class StudentResource {
 		Response.ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
 				"attachment; filename=\"vat.pdf\"");
+		return response.build();
+	}
+	
+	@GET
+	@Path("png")
+	@Produces("application/png")
+	public Response getPNG() {
+		File file = new File("C:\\Users\\piotr\\Documents\\git\\soa_rest\\lab2\\lab2-web\\soapng.png");
+		Response.ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+				"attachment; filename=\"soapng.png\"");
 		return response.build();
 	}
 
